@@ -416,6 +416,7 @@ sub mywatch {
     $command =~ /^(.+)$/;
     return if(!defined($1));
     my $securecommand = $1;
+    utf8::downgrade($securecommand) if (utf8::is_utf8($securecommand));
     system("$securecommand");
   }
   if(defined($Message) && $Path->{'alert'}) {
